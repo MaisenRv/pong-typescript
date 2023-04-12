@@ -1,0 +1,15 @@
+{
+  "name": "pongtypescript",
+  "version": "1.0.0",
+  "description": "Pong Game with typescript",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^5.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Santiago Mancera",
+  "license": "ISC"
+}
