@@ -19,6 +19,33 @@ export class RealPlayer extends Player implements GameElement{
         
     }
 
+    private collisions(canvas:HTMLCanvasElement):void{
+        if (this.position.getPosition().y < 20) {
+            this.hitBox = this.collision.calculateCollision(canvas,this.position);
+            if (this.hitBox.top) {
+                this.position.updatePosition({
+                    x:this.position.getPosition().x,
+                    y:1,
+                    w:this.position.getPosition().w,
+                    h:this.position.getPosition().h
+                })
+            }
+            return
+        }
+        if (this.position.getPosition().y + this.position.getPosition().h > canvas.height - 20) {
+            this.hitBox = this.collision.calculateCollision(canvas,this.position);
+            if (this.hitBox.bottom) {
+                this.position.updatePosition({
+                    x:this.position.getPosition().x,
+                    y:canvas.height - this.position.getPosition().h,
+                    w:this.position.getPosition().w,
+                    h:this.position.getPosition().h
+                })
+            }
+            return
+        }
+
+    }
 
     update(ctx:CanvasRenderingContext2D|null,canvas:HTMLCanvasElement):void{
         this.draw(ctx);

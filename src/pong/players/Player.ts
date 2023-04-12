@@ -9,7 +9,7 @@ export class Player{
 
     readonly speedMove: number = 5;
 
-    private hitBox:hitBox;
+    protected hitBox:hitBox;
 
     constructor(coordX:number,coordY:number,width:number,height:number){
         this.position = new Coordinates(coordX,coordY,width,height)
@@ -19,29 +19,6 @@ export class Player{
             left:false,
             right:false
         }
-    }
-
-    protected collisions(canvas:HTMLCanvasElement){
-        this.hitBox = this.collision.calculateCollision(canvas,this.position);
-
-        if (this.hitBox.top) {
-            this.position.updatePosition({
-                x:this.position.getPosition().x,
-                y:1,
-                w:this.position.getPosition().w,
-                h:this.position.getPosition().h
-            })
-        }
-
-        if (this.hitBox.bottom) {
-            this.position.updatePosition({
-                x:this.position.getPosition().x,
-                y:canvas.height - this.position.getPosition().h,
-                w:this.position.getPosition().w,
-                h:this.position.getPosition().h
-            })
-        }
-
     }
 
     getPosition():Coordinates{

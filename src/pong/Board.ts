@@ -38,7 +38,7 @@ export class Board {
     update(){
         this.clearBoard()
         this.playerOne.update(this.ctx,this.canvas)
-        this.playerTwo.update(this.ctx)
+        this.playerTwo.update(this.ctx, this.ball.getPosition(), this.ball.getDirectionX());
         this.ball.update(this.ctx,this.canvas,[this.playerOne.getPosition(),this.playerTwo.getPosition()])
     }
 

@@ -8,8 +8,8 @@ export class Ball implements GameElement{
     private collision:Collisions = new Collisions();
     private position:Coordinates;
 
-    directionX:number = 0;
-    directionY:number = 1;
+    private directionX:number = 0;
+    private directionY:number = 1;
 
     constructor(coordX:number,coordY:number,width:number,height:number) {
         this.position = new Coordinates(coordX,coordY,width,height)
@@ -35,8 +35,6 @@ export class Ball implements GameElement{
             if (hitBoxBall.top) {
                 this.directionY = -this.directionY;
             }
-            console.log(hitBoxBall.top);
-            
         }
         if (this.position.getPosition().y + this.position.getPosition().h > canvas.height - 100 && this.directionY > 0) {
             const hitBoxBall:hitBox = this.collision.calculateCollision(canvas,this.position)
@@ -76,5 +74,13 @@ export class Ball implements GameElement{
     }
     positionMove(position:position){
         this.position.updatePosition(position)
+    }
+
+    getPosition():Coordinates{
+        return this.position;
+    }
+    
+    getDirectionX():number{
+        return this.directionX;
     }
 }
