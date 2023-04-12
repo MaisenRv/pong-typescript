@@ -10,6 +10,9 @@ export class Board {
     private canvas:HTMLCanvasElement
     private ctx:CanvasRenderingContext2D | null;
 
+    private scorePlayerLeft:number = 0;
+    private scorePlayerRight:number = 0;
+
     constructor(canvas:HTMLCanvasElement) {
 
         this.canvas = canvas;
@@ -32,7 +35,9 @@ export class Board {
     }
 
     draw(){
-       
+        let centerX:number = (this.canvas.width / 2)
+        this.drawDotLine(this.ctx,centerX);
+        this.drawScoreBoard(this.ctx,centerX);  
     }
 
     update(){
@@ -40,10 +45,32 @@ export class Board {
         this.playerOne.update(this.ctx,this.canvas)
         this.playerTwo.update(this.ctx, this.ball.getPosition(), this.ball.getDirectionX());
         this.ball.update(this.ctx,this.canvas,[this.playerOne.getPosition(),this.playerTwo.getPosition()])
+        this.draw();
     }
 
     private clearBoard(){
         this.ctx!.clearRect(0,0,this.canvas.width,this.canvas.height)
+    }
+
+    private drawDotLine(ctx:CanvasRenderingContext2D|null, centerX:number){
+        let line:number = (this.canvas.height / 20)
+        for (let i = 0; i < 20 ; i++) {
+            ctx!.strokeStyle = "white"
+            ctx!.moveTo(centerX, ((line * i) + 5))
+            ctx!.lineTo(centerX, (line * (i + 1)) - 5)
+            ctx!.stroke()   
+        }
+    }
+
+    private drawScoreBoard(ctx:CanvasRenderingContext2D|null,centerX:number){
+        
+        let textScorePlayerLeft:number = centerX - (50 / 2) - (50 * 2)  
+        let textScorePlayerRight:number = centerX - (50 / 2) + (50 * 2)
+
+        ctx!.font = 50 + "pt consolas"
+        ctx!.fillStyle = "white"
+        ctx!.fillText(this.scorePlayerLeft.toString() ,textScorePlayerLeft,100)
+        ctx!.fillText(this.scorePlayerRight.toString(),textScorePlayerRight,100)
     }
 
     resizeBoard(){
