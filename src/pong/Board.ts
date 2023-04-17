@@ -106,6 +106,8 @@ export class Board {
     verifyPoint():void{
         if (this.ball.position.getPosition().x > this.canvas.width) {
             this.ball.setDirectionX(2);
+            if(this.verifyWin()) return;
+            
             if (this.ball.position.getPosition().x > this.canvas.width + 100) {
                 this.scorePlayerLeft++
                 const newPositionBall:position = {
@@ -134,5 +136,20 @@ export class Board {
             }
             return
         }
+    }
+
+    verifyWin():boolean{
+        if (this.scorePlayerLeft > 5 || this.scorePlayerRight > 5) {
+            this.scorePlayerLeft = 0;
+            this.scorePlayerRight = 0;
+            if (this.scorePlayerLeft < 5) {
+                alert("La CPU le ha ganado");
+            }else{
+                alert("Ganaste!!!!");
+            }
+            this.resizeBoard();
+            return true;
+        }
+        return false;
     }
 }
