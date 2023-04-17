@@ -5,12 +5,13 @@ import { Collisions } from "../utils/Collisions.js";
 import { Coordinates } from "../utils/Coordinates.js";
 
 export class Ball implements GameElement{
-    private collision:Collisions = new Collisions();
-    private position:Coordinates;
+    collision:Collisions = new Collisions();
+    position:Coordinates;
 
-    private directionX:number = 0;
+    private directionX:number = 2;
     private directionY:number = 1;
 
+    maxSpeedDirectionX:number = 7;
     constructor(coordX:number,coordY:number,width:number,height:number) {
         this.position = new Coordinates(coordX,coordY,width,height)
     }
@@ -48,13 +49,23 @@ export class Ball implements GameElement{
         if (this.position.getPosition().x + this.position.getPosition().w > canvas.width - 100 && this.directionX > 0) {
             const collisionWithPlayer:hitBox = this.collision.calculateCollisionBall(this.position,playersPositions[0]);
             if (collisionWithPlayer.right) {
-                this.directionX = -this.directionX;
+                if (this.directionX < this.maxSpeedDirectionX) {
+                    this.directionX = -(this.directionX * (Math.random()/3 + 1));
+                }else{
+                    this.directionX = -this.directionX;
+                }
+                this.directionY = this.directionY * (Math.random()/4 + 1);
             }
         }
         if(this.position.getPosition().x < 100 && this.directionX < 0){
             const collisionWithPlayer:hitBox =this.collision.calculateCollisionBall(this.position,playersPositions[1]);
             if (collisionWithPlayer.left) {
-                this.directionX = -this.directionX;   
+                if (this.directionX > -this.maxSpeedDirectionX) {
+                    this.directionX = -(this.directionX * (Math.random()/3 + 1)); 
+                }else{
+                    this.directionX = -this.directionX;
+                }  
+                this.directionY = this.directionY * (Math.random()/4 + 1);
             }
         }
 
@@ -82,5 +93,12 @@ export class Ball implements GameElement{
     
     getDirectionX():number{
         return this.directionX;
+    }
+    getDirectionY():number{
+        return this.directionY;
+    }
+
+    setDirectionY(newDirectionY:number){
+        this.directionY = newDirectionY;
     }
 }

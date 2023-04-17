@@ -9,7 +9,7 @@ export class CpuPlayer extends Player implements GameElement{
     }
     update(ctx:CanvasRenderingContext2D|null,positionBall:Coordinates, ballDirectioX:number):void{
         if (ballDirectioX > 0) {
-            this.playerIA(positionBall, 3);
+            this.playerIA(positionBall, 2);
         }else{
             this.playerIA(positionBall, this.speedMove);
         }

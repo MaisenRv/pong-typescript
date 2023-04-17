@@ -1,3 +1,4 @@
+import { Ball } from "../elements/Ball.js";
 import { hitBox } from "../interfaces/hitBox.js";
 import { position } from "../interfaces/position.js";
 import { Collisions } from "../utils/Collisions.js";
@@ -7,7 +8,7 @@ export class Player{
     protected position:Coordinates;
     protected collision:Collisions = new Collisions();
 
-    readonly speedMove: number = 5;
+    readonly speedMove: number = 4;
 
     protected hitBox:hitBox;
 
