@@ -3,6 +3,7 @@ import { hitBox } from "../interfaces/hitBox.js";
 import { position } from "../interfaces/position.js";
 import { Collisions } from "../utils/Collisions.js";
 import { Coordinates } from "../utils/Coordinates.js";
+import { SoundEffect } from "../utils/SoundEffect.js";
 
 export class Ball implements GameElement{
     collision:Collisions = new Collisions();
@@ -55,6 +56,7 @@ export class Ball implements GameElement{
                     this.directionX = -this.directionX;
                 }
                 this.directionY = this.directionY * (Math.random()/4 + 1);
+                new SoundEffect().ring();
             }
         }
         if(this.position.getPosition().x < 100 && this.directionX < 0){
@@ -66,6 +68,7 @@ export class Ball implements GameElement{
                     this.directionX = -this.directionX;
                 }  
                 this.directionY = this.directionY * (Math.random()/4 + 1);
+                new SoundEffect().ring();
             }
         }
 
