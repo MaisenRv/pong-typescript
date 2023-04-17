@@ -45,6 +45,7 @@ export class Board {
         this.playerOne.update(this.ctx,this.canvas)
         this.playerTwo.update(this.ctx, this.ball.getPosition(), this.ball.getDirectionX());
         this.ball.update(this.ctx,this.canvas,[this.playerOne.getPosition(),this.playerTwo.getPosition()])
+        this.verifyPoint()
         this.draw();
     }
 
@@ -100,5 +101,38 @@ export class Board {
             h:10 
         }
         this.ball.positionMove(newPositionBall);
+    }
+
+    verifyPoint():void{
+        if (this.ball.position.getPosition().x > this.canvas.width) {
+            this.ball.setDirectionX(2);
+            if (this.ball.position.getPosition().x > this.canvas.width + 100) {
+                this.scorePlayerLeft++
+                const newPositionBall:position = {
+                    x:(this.canvas.width / 2) - (10 / 2),
+                    y:(this.canvas.height / 2) - (10 / 2),
+                    w:10,
+                    h:10 
+                }
+                this.ball.positionMove(newPositionBall)
+                this.ball.setDirectionY(1 - Math.random()*2);
+            }
+            return
+        }
+        if (this.ball.position.getPosition().x < 0) {
+            this.ball.setDirectionX(-2);
+            if (this.ball.position.getPosition().x < -100) {
+                this.scorePlayerRight++
+                const newPositionBall:position = {
+                    x:(this.canvas.width / 2) - (10 / 2),
+                    y:(this.canvas.height / 2) - (10 / 2),
+                    w:10,
+                    h:10 
+                }
+                this.ball.positionMove(newPositionBall)
+                this.ball.setDirectionY(1 - Math.random()*2);
+            }
+            return
+        }
     }
 }

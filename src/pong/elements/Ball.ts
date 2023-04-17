@@ -101,4 +101,8 @@ export class Ball implements GameElement{
     setDirectionY(newDirectionY:number){
         this.directionY = newDirectionY;
     }
+    setDirectionX(newDirectionX:number){
+        this.directionX = newDirectionX;
+    }
+    
 }
